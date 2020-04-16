@@ -1,6 +1,32 @@
 public class BST<T>
 {
     Node root;
+
+    public boolean find(Comparable item)
+    {
+        return find(root, item);
+    }
+
+    private boolean find(Node node, Comparable item)
+    {
+        if (node == null)
+        {
+            return false;
+        }
+        if (item.compareTo(node.data) == 0)
+        {
+            return true;
+        }
+        if ( item.compareTo(node.data) > 0)
+        {
+            return find(node.right, item);
+        }
+        else
+        {
+           return find(node.left, item);
+        }
+    }  
+
     public void insert(Comparable item)
     {
         root = insertNode(item, root);
@@ -24,6 +50,20 @@ public class BST<T>
             node.left = insertNode(item, node.left);
         }
         return node;
+    }
+
+    private void print(Node node)
+    {
+        if (node != null){
+            print(node.left);
+            System.out.println(node.data);
+            print(node.right);
+        }
+    }
+
+    public void print()
+    {
+        print(root);
     }
 
     public void delete(Comparable item)
@@ -68,44 +108,5 @@ public class BST<T>
             return min;
         }
         else return removeMin(node.left);
-    }
-
-    public boolean find(Comparable item)
-    {
-        return find(root, item);
-    }
-
-    private boolean find(Node node, Comparable item)
-    {
-        if (node == null)
-        {
-            return false;
-        }
-        if (item.compareTo(node.data) == 0)
-        {
-            return true;
-        }
-        if ( item.compareTo(node.data) > 0)
-        {
-            return find(node.right, item);
-        }
-        else
-        {
-           return find(node.left, item);
-        }
-    }  
-
-    private void print(Node node)
-    {
-        if (node != null){
-            print(node.left);
-            System.out.println(node.data);
-            print(node.right);
-        }
-    }
-
-    public void print()
-    {
-        print(root);
-    }
+    } 
 }
